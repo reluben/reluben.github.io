@@ -1,0 +1,487 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Workday Time Tracker</title>
+<link rel="icon" href="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2360a5fa' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='8'/%3E%3Cpath d='M12 8v5l3 3'/%3E%3C/svg%3E">
+<style>
+  :root {
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
+  }
+  body {
+    margin: 16px;
+    background: #1e1e2e;
+    color: #e0e0e0;
+    overflow-x: hidden;
+  }
+  header {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+  }
+  h1 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #ffffff;
+  }
+  .controls {
+    margin-left: auto;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  input[type=text] {
+    padding: 8px;
+    border: 1px solid #4b5563;
+    border-radius: 6px;
+    background: #2d2d3b;
+    color: #e0e0e0;
+  }
+  input[type=text]::placeholder {
+    color: #9ca3af;
+  }
+  button {
+    padding: 8px 10px;
+    border: 0;
+    background: #2563eb;
+    color: #fff;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  button.secondary {
+    background: #4b5563;
+  }
+  button.warn {
+    background: #ef4444;
+  }
+  main {
+    display: flex;
+    gap: 12px;
+    overflow: auto;
+    padding-bottom: 20px;
+    max-width: 100%;
+  }
+  .col {
+    background: #2d2d3b;
+    border: 1px solid #4b5563;
+    border-radius: 8px;
+    min-width: 260px;
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+  }
+  .col header {
+    padding: 12px;
+    border-bottom: 1px solid #4b5563;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  .project-name {
+    font-weight: 600;
+    flex: 1;
+    color: #ffffff;
+  }
+  .timer {
+    font-family: monospace;
+    font-size: 1rem;
+    padding: 12px;
+    border-bottom: 1px solid #4b5563;
+    text-align: center;
+    color: #e0e0e0;
+    background: #252534;
+  }
+  .controls-row {
+    padding: 12px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .log {
+    padding: 12px;
+    overflow: auto;
+    flex: 1;
+    max-height: 320px;
+    max-width: 100%;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    color: #e0e0e0;
+  }
+  td, th {
+    padding: 6px 4px;
+    border-bottom: 1px dashed #4b5563;
+    text-align: left;
+  }
+  th:last-child, td:last-child {
+    text-align: right;
+  }
+  .totals {
+    padding: 10px;
+    border-top: 1px solid #4b5563;
+    background: #252534;
+    text-align: center;
+    color: #e0e0e0;
+  }
+  .small {
+    font-size: 0.85rem;
+    color: #9ca3af;
+  }
+  .active-dot {
+    width: 10px;
+    height: 10px;
+    background: #10b981;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+  .inactive-dot {
+    background: #6b7280;
+  }
+  footer {
+    margin-top: 12px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    color: #e0e0e0;
+  }
+  #dayTotal {
+    font-family: monospace;
+    font-weight: 700;
+    color: #ffffff;
+  }
+  @media (max-width: 900px) {
+    main {
+      flex-direction: column;
+    }
+    .col {
+      min-width: auto;
+      width: 100%;
+    }
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>Workday Time Tracker</h1>
+  <div>
+    <label class="small">Date:</label>
+    <span id="workDate" class="small"></span>
+  </div>
+  <div class="controls">
+    <input id="newProjectName" type="text" placeholder="New project name" />
+    <button id="addProjectBtn">Add project</button>
+    <button id="exportCsvBtn" class="secondary">Export CSV</button>
+    <button id="clearAllBtn" class="warn">Clear all times</button>
+  </div>
+</header>
+
+<main id="projectsContainer" aria-live="polite">
+  <!-- project columns inserted here -->
+</main>
+
+<footer>
+  <div class="small">Total day time:</div>
+  <div id="dayTotal" style="font-family:monospace;font-weight:700">00:00:00</div>
+</footer>
+
+<script>
+(() => {
+  // Utilities
+  const formatHMS = secs => {
+    const sign = secs < 0 ? '-' : '';
+    secs = Math.abs(Math.round(secs));
+    const h = Math.floor(secs/3600), m = Math.floor((secs%3600)/60), s = secs%60;
+    return sign + [h,m,s].map(n => String(n).padStart(2,'0')).join(':');
+  };
+  const getWeekday = date => {
+    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    return days[new Date(date).getDay()];
+  };
+
+  // State: projects -> {id, name, log: [{weekday, duration}], runningStart}
+  let projects = [];
+
+  // Load from localStorage if present
+  const STORAGE_KEY = 'wdtt_projects_v2';
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) projects = JSON.parse(saved);
+  } catch(e) { projects = []; }
+
+  // Elements
+  const projectsContainer = document.getElementById('projectsContainer');
+  const addProjectBtn = document.getElementById('addProjectBtn');
+  const newProjectName = document.getElementById('newProjectName');
+  const workDate = document.getElementById('workDate');
+  const dayTotalEl = document.getElementById('dayTotal');
+  const exportCsvBtn = document.getElementById('exportCsvBtn');
+  const clearAllBtn = document.getElementById('clearAllBtn');
+
+  // Init date display
+  workDate.textContent = new Date().toLocaleDateString();
+
+  // Core functions
+  const save = () => localStorage.setItem(STORAGE_KEY, JSON.stringify(projects));
+  const addProject = (name = 'Project') => {
+    const id = 'p_' + Date.now() + Math.random().toString(36).slice(2,8);
+    projects.push({ id, name, log: [], runningStart: null });
+    save(); render();
+  };
+  const removeProject = id => {
+    projects = projects.filter(p => p.id !== id);
+    save(); render();
+  };
+  const stopAllOtherTimers = (exceptId) => {
+    const now = Date.now();
+    let changed = false;
+    projects.forEach(p => {
+      if (p.runningStart && p.id !== exceptId) {
+        const duration = Math.round((now - p.runningStart) / 1000);
+        const weekday = getWeekday(p.runningStart);
+        const logEntry = p.log.find(e => e.weekday === weekday);
+        if (logEntry) {
+          logEntry.duration += duration;
+        } else {
+          p.log.push({ weekday, duration });
+        }
+        p.runningStart = null;
+        changed = true;
+      }
+    });
+    if (changed) save();
+  };
+  const startTimer = id => {
+    const p = projects.find(x => x.id === id);
+    if (!p || p.runningStart) return;
+    stopAllOtherTimers(id);
+    p.runningStart = Date.now();
+    save(); render();
+  };
+  const stopTimer = id => {
+    const p = projects.find(x => x.id === id);
+    if (!p || !p.runningStart) return;
+    const duration = Math.round((Date.now() - p.runningStart) / 1000);
+    const weekday = getWeekday(p.runningStart);
+    const logEntry = p.log.find(e => e.weekday === weekday);
+    if (logEntry) {
+      logEntry.duration += duration;
+    } else {
+      p.log.push({ weekday, duration });
+    }
+    p.runningStart = null;
+    save(); render();
+  };
+  const toggleTimer = id => {
+    const p = projects.find(x => x.id === id);
+    if (!p) return;
+    if (p.runningStart) stopTimer(id); else startTimer(id);
+  };
+  const clearAllTimes = () => {
+    if (!confirm('Clear all times and running timers? This will keep project names.')) return;
+    projects.forEach(p => { p.log = []; p.runningStart = null; });
+    save(); render();
+  };
+  const projectTotalSeconds = p => {
+    let s = p.log.reduce((acc, e) => acc + (e.duration || 0), 0);
+    if (p.runningStart) s += Math.round((Date.now() - p.runningStart) / 1000);
+    return s;
+  };
+  const projectDailySeconds = p => {
+    const today = getWeekday(new Date());
+    const logEntry = p.log.find(e => e.weekday === today);
+    let seconds = logEntry ? logEntry.duration : 0;
+    if (p.runningStart) {
+      seconds += Math.round((Date.now() - p.runningStart) / 1000);
+    }
+    return seconds;
+  };
+  const dayTotalSeconds = () => projects.reduce((acc, p) => acc + projectDailySeconds(p), 0);
+
+  // Render
+  function render() {
+    projectsContainer.innerHTML = '';
+    projects.forEach(p => {
+      const col = document.createElement('div'); col.className = 'col';
+      const header = document.createElement('header');
+      const nameEl = document.createElement('div'); nameEl.className = 'project-name'; nameEl.textContent = p.name;
+      const editBtn = document.createElement('button'); editBtn.className = 'secondary'; editBtn.textContent = 'Edit';
+      const delBtn = document.createElement('button'); delBtn.className = 'warn'; delBtn.textContent = 'Delete';
+      header.appendChild(nameEl); header.appendChild(editBtn); header.appendChild(delBtn);
+      col.appendChild(header);
+
+      const timerEl = document.createElement('div'); timerEl.className = 'timer';
+      const running = !!p.runningStart;
+      const dot = document.createElement('span'); dot.className = running ? 'active-dot' : 'inactive-dot';
+      timerEl.appendChild(dot);
+      const timeText = document.createElement('span');
+      timeText.style.marginLeft = '6px';
+      timeText.textContent = formatHMS(projectDailySeconds(p));
+      timerEl.appendChild(timeText);
+      col.appendChild(timerEl);
+
+      const controlsRow = document.createElement('div'); controlsRow.className = 'controls-row';
+      const startStopBtn = document.createElement('button'); startStopBtn.textContent = running ? 'Stop' : 'Start';
+      const quick15 = document.createElement('button'); quick15.textContent = '+15m';
+      const quick30 = document.createElement('button'); quick30.textContent = '+30m';
+      const manualAdd = document.createElement('button'); manualAdd.textContent = 'Add manual';
+      controlsRow.appendChild(startStopBtn);
+      controlsRow.appendChild(quick15);
+      controlsRow.appendChild(quick30);
+      controlsRow.appendChild(manualAdd);
+      col.appendChild(controlsRow);
+
+      const logDiv = document.createElement('div'); logDiv.className = 'log';
+      const tbl = document.createElement('table');
+      const thead = document.createElement('thead');
+      thead.innerHTML = '<tr><th>Weekday</th><th style="text-align:right">Duration</th></tr>';
+      tbl.appendChild(thead);
+      const tbody = document.createElement('tbody');
+      const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+      days.forEach(day => {
+        const entry = p.log.find(e => e.weekday === day) || { weekday: day, duration: 0 };
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td>${entry.weekday}</td><td style="text-align:right">${formatHMS(entry.duration)}</td>`;
+        tbody.appendChild(tr);
+      });
+      tbl.appendChild(tbody);
+      logDiv.appendChild(tbl);
+      col.appendChild(logDiv);
+
+      const totals = document.createElement('div'); totals.className = 'totals';
+      totals.innerHTML = `<div class="small">Weekly total</div><div style="font-family:monospace;font-weight:700">${formatHMS(projectTotalSeconds(p))}</div>`;
+      col.appendChild(totals);
+
+      // Events
+      startStopBtn.addEventListener('click', () => { toggleTimer(p.id); });
+      delBtn.addEventListener('click', () => { if (confirm('Delete project and its logs?')) removeProject(p.id); });
+      editBtn.addEventListener('click', () => {
+        const nn = prompt('Project name', p.name);
+        if (nn !== null) { p.name = nn.trim() || p.name; save(); render(); }
+      });
+      quick15.addEventListener('click', () => {
+        stopAllOtherTimers(null);
+        const weekday = getWeekday(new Date());
+        const duration = 15 * 60;
+        const logEntry = p.log.find(e => e.weekday === weekday);
+        if (logEntry) {
+          logEntry.duration += duration;
+        } else {
+          p.log.push({ weekday, duration });
+        }
+        save(); render();
+      });
+      quick30.addEventListener('click', () => {
+        stopAllOtherTimers(null);
+        const weekday = getWeekday(new Date());
+        const duration = 30 * 60;
+        const logEntry = p.log.find(e => e.weekday === weekday);
+        if (logEntry) {
+          logEntry.duration += duration;
+        } else {
+          p.log.push({ weekday, duration });
+        }
+        save(); render();
+      });
+      manualAdd.addEventListener('click', () => {
+        stopAllOtherTimers(null);
+        const mins = prompt('Add minutes (positive integer):', '60');
+        const m = parseInt(mins || '', 10);
+        if (!isNaN(m) && m > 0) {
+          const duration = m * 60;
+          const weekday = getWeekday(new Date());
+          const logEntry = p.log.find(e => e.weekday === weekday);
+          if (logEntry) {
+            logEntry.duration += duration;
+          } else {
+            p.log.push({ weekday, duration });
+          }
+          save(); render();
+        }
+      });
+
+      projectsContainer.appendChild(col);
+    });
+
+    // Update day total
+    dayTotalEl.textContent = formatHMS(dayTotalSeconds());
+  }
+
+  // Ticking updates while timers run
+  setInterval(() => {
+    const cols = document.querySelectorAll('.col');
+    projects.forEach((p, i) => {
+      const col = cols[i];
+      if (!col) return;
+      const timerText = col.querySelector('.timer span:nth-child(2)');
+      if (timerText) timerText.textContent = formatHMS(projectDailySeconds(p));
+      const tot = col.querySelector('.totals div[style]');
+      if (tot) tot.textContent = formatHMS(projectTotalSeconds(p));
+      const startStopBtn = col.querySelector('.controls-row button');
+      if (startStopBtn) startStopBtn.textContent = p.runningStart ? 'Stop' : 'Start';
+      const dot = col.querySelector('.timer span');
+      if (dot) dot.className = p.runningStart ? 'active-dot' : 'inactive-dot';
+    });
+    dayTotalEl.textContent = formatHMS(dayTotalSeconds());
+  }, 1000);
+
+  // Add project button
+  addProjectBtn.addEventListener('click', () => {
+    const name = (newProjectName.value || 'Project').trim();
+    addProject(name);
+    newProjectName.value = '';
+  });
+
+  newProjectName.addEventListener('keydown', e => { if (e.key === 'Enter') addProjectBtn.click(); });
+
+  // Export CSV (Project, Sunday, Monday, ..., Saturday)
+  exportCsvBtn.addEventListener('click', () => {
+    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    const rows = [['Project', ...days]];
+    projects.forEach(p => {
+      const row = [p.name];
+      days.forEach(day => {
+        const logEntry = p.log.find(e => e.weekday === day);
+        const totalMins = logEntry ? Math.floor(logEntry.duration / 60) : 0;
+        const hours = Math.floor(totalMins / 60);
+        const mins = totalMins % 60;
+        const durationStr = `${hours}:${String(mins).padStart(2, '0')}`;
+        row.push(durationStr);
+      });
+      rows.push(row);
+    });
+
+    if (rows.length === 1) {
+      alert('No projects to export.');
+      return;
+    }
+
+    const csv = rows.map(r => r.map(cell => {
+      if (cell === null || cell === undefined) return '';
+      const s = String(cell).replace(/"/g, '""');
+      return s.includes(',') || s.includes('\n') ? `"${s}"` : s;
+    }).join(',')).join('\n');
+
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a'); a.href = url; a.download = `time-tracker-${new Date().toISOString().slice(0, 10)}.csv`;
+    document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+  });
+
+  clearAllBtn.addEventListener('click', clearAllTimes);
+
+  // If no projects, add a couple sensible defaults
+  if (projects.length === 0) { addProject('Project A'); addProject('Project B'); save(); }
+
+  render();
+})();
+</script>
+</body>
+</html>
