@@ -1,6 +1,6 @@
 
 ================================================================
-WHAT THE HELL IS DISC GOLF?
+WHAT IS DISC GOLF?
 ================================================================
 Disc golf is basically regular ball golf, but instead of hitting a tiny ball with a stick, you throw flying discs (frisbee-like things) into metal baskets. The goal: get your disc into the basket in as few throws as possible. Par works the same way as ball golf (par 3, par 4, etc.). Courses are usually 9 or 18 holes, free to play, set in public parks. No tee times, no greens fees, no dress code. Just show up and throw.
 
@@ -18,14 +18,14 @@ BASIC RULES (the ones you actually need to know Day 1)
 3. Play your disc where it lies (yes, even in trees, water, bushes).
 4. Your disc must come to rest IN the basket or chained section to finish the hole.
 5. Mark your lie: put a mini marker disc right in front of your thrown disc on the line toward the basket (or just leave the disc and stand behind it).
-6. One-meter rule is DEAD (as of 2024) – if your disc is above the ground more than 1m in a tree, no penalty anymore, just play it or declare unplayable and take 1-throw penalty.
+6. One-meter rule is DEAD (as of 2024) - if your disc is above the ground more than 1m in a tree, no penalty anymore, just play it or declare unplayable and take 1-throw penalty.
 7. Out-of-bounds (OB): white stakes or painted lines. Usually re-tee with 1-throw penalty or play from last in-bounds with penalty.
 8. Mandatory (mando): big arrow signs. Miss the wrong side = rethrow with penalty.
 9. Foot faults on the tee: back foot can't be past the front of the teepad when you release.
 10. Courtesy rule: don't throw if people are in range. Don't be a jerk.
 
 ================================================================
-EQUIPMENT YOU ACTUALLY NEED (start here)
+EQUIPMENT YOU ACTUALLY NEED
 ================================================================
 You do NOT need 20 discs. In fact, the fastest way to get good is:
 
@@ -76,9 +76,9 @@ Key Detail: Turn activates at/above rated speed; slower throws = less/no turn. W
 
 FADE is the disc's inevitable left hook (RHBH) as it slows and loses energy, due to rim torque/gravity. Predictable finish.
 
-0–1 (Straight/Understable): Minimal fade—holds line longest. Distance kings.
-2–3: Moderate S-finish.
-4–5 (Overstable): Hard left crash. Hyzer bombs, headwind control, skips.
+0-1 (Straight/Understable): Minimal fade—holds line longest. Distance kings.
+2-3: Moderate S-finish.
+4-5 (Overstable): Hard left crash. Hyzer bombs, headwind control, skips.
 
 Key Detail: Fade starts later/harder with nose-down releases; earlier if underpowered. High fade = reliability for pros. Example: Innova Firebird (4 Fade) hooks reliably in wind.
 ---
@@ -95,16 +95,16 @@ Look for these traits:
 - Lots of glide (4 or higher)
 - Understable or straight flight (turn -2 or -3)
 - Less fade is generally easier for beginners
-- Light weight (165-170g is magic for new arms)
+- Lightweight (165-170g is magic for new arms)
 
 Innova has two starter sets: the cheaper DX plastic set ($29), and the more expensive GStar starter set ($38); you cannot go wrong with either.
 
 Do not worry about distance drivers yet. If you're buying new choose a lighter weight in the plastic mentioned. You can also buy from Innova Factory Second website for a slight discount, no graphics (if that's what you prefer), and sometimes a bonus disc with your order. You can also buy some from Facebook Marketplace, disc golf stores (they do have used sections), or even at the first hole of a disc golf course (if there's a nice homeless guy selling there). Discs are usually less than $20 new and between $5-$10 used.
 
-Hall-of-fame beginner Innovas discs (pick one from each row):
-- Leopard3 (DX or Star) | Leopard               | TeeBird
-- Roc (DX or KC Pro)    | Shark (DX)            | Fox
-- Aviar (DX)            | KC Aviar              | Dart
+Hall-of-fame beginner discs from Innova (pick one from each row):
+Leopard3 (DX or Star) | Leopard               | TeeBird
+Roc (DX or KC Pro)    | Shark (DX)            | Fox
+Aviar (DX)            | KC Aviar              | Dart
 
 ================================================================
 HOW TO ACTUALLY GET BETTER (real talk)
