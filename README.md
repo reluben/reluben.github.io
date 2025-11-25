@@ -15,10 +15,11 @@ This project is a minimal homepage listing categorized links and a local referen
 ## Links (in order)
 1. Watching movies and TV shows
 2. Watching anime
-3. AI models
-4. Timer — track time spent on a project each day (useful for jobs requiring chargeable time)
-5. [Word Games](./quickwordgames.html) — short word games (links to [longer word games](./nonquickwordgames.html))
-6. [Alternatives](./alternatives.html) — fallback links if primary links are down
+3. My (this) GitHub page
+4. AI models
+5. Timer — track time spent on a project each day (useful for jobs requiring chargeable time)
+6. [Word Games](./quickwordgames.html) — short word games (links to [longer word games](./nonquickwordgames.html))
+7. [Alternatives](./alternatives.html) — fallback links if primary links are down
 
 
 ## Usage
