@@ -1,16 +1,26 @@
-# reluben.github.io
-Useful links all in one place, with a simple interface. Can be used as a homepage in your browser which reduces the need for bookmarks.
+# Useful Links — Homepage
 
-The first link is for watching movies and TV shows.
-The second link is for watching anime.
-The third link is for using AI models.
-The fourth is for a timer to track how much time you spend on a project each day (useful for jobs that require you to charge time to various projects)
+A simple homepage that puts useful links all in one place and reduces the need for bookmarks.
 
-Word Games
-A page with word games that can typically be finished quickly.
-From this page you can also go to word games that typically are not as quick.
+## Overview
+This project is a minimal homepage listing categorized links and a local reference file for disc golf beginners.
 
-Alternatives
-A page with links the user can go to in the event that the links on the first page are down.
+# Features
+- Quick access to streaming and AI resources  
+- Short word games and a pathway to longer word games  
+- A timer for tracking project time (useful for billable work)  
+- An "Alternatives" page with fallback links if primary links are down  
+- Local [disc golf notes](./discGolf.txt) 
 
-I also have a text file to help disc golf beginners; it is not going to be a link as I doubt it will be used frequently and I can't think of a way to implement it into the website that I like
+## Links (in order)
+1. Watching movies and TV shows
+2. Watching anime
+3. AI models
+4. Timer — track time spent on a project each day (useful for jobs requiring chargeable time)
+5. [Word Games](./quickwordgames.html) — short word games (links to [longer word games](./nonquickwordgames.html))
+6. [Alternatives](./alternatives.html) — fallback links if primary links are down
+
+
+## Usage
+- Clone the repo and open the main HTML file in your browser.
+- Edit link targets and add or remove categories as needed.
