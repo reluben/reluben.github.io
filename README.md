@@ -3,7 +3,7 @@
 A simple [homepage](https://reluben.github.io) that puts useful links all in one place and reduces the need for bookmarks.
 
 # Features 
-- Local [disc golf notes](./discgolf.html) 
+- Local [disc golf notes](https://reluben.github.io/discgolf.html) 
 
 ## Links (in order)
 1. Watching movies and TV shows
