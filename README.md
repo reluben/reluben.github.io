@@ -2,9 +2,6 @@
 
 A simple [homepage](https://reluben.github.io) that puts useful links all in one place and reduces the need for bookmarks.
 
-# Features 
-- Local [disc golf notes](https://reluben.github.io/discgolf.html) 
-
 ## Links (in order)
 1. Watching movies and TV shows
 2. Watching anime
@@ -14,6 +11,8 @@ A simple [homepage](https://reluben.github.io) that puts useful links all in one
 6. [Word Games](https://reluben.github.io/wordgames.html) — word games
 7. [Alternatives](https://reluben.github.io/alternatives.html) — fallback links if primary links are down
 
+# Extras 
+- [Disc golf notes](https://reluben.github.io/discgolf.html) 
 
 ## Usage
 - Clone the repo and open the main HTML file in your browser.
