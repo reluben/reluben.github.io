@@ -11,7 +11,7 @@ A simple [homepage](https://reluben.github.io) that puts useful links all in one
 6. [Alternatives](https://reluben.github.io/alternatives.html) — fallback links if primary links are down
 
 # Extras (can be found in alternatives)
-- [Disc golf notes](https://reluben.github.io/discgolf.html)
+- [Disc golf beginner's guide](https://reluben.github.io/discgolf.html)
 - [Timer](https://reluben.github.io/project_timer.html) — for tracking project time (useful for billable work) 
 
 ## Usage
