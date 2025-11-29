@@ -8,34 +8,47 @@
   <meta name="author" content="reluben">
   <title>Word Games</title>
   <style>
+    :root {
+      /* Light mode */
+      --bg: white;
+      --text: #1a1a1a;
+      --link: tomato;
+      --border: #cccccc;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        /* Your exact original dark colors */
+        --bg: black;
+        --text: grey;
+        --link: tomato;
+        --border: slategray;
+      }
+    }
+
     body {
-      background-color: black;
-      font-size: 27px;
-      color: slategrey;
-      font-family: 'Arial', sans-serif; /* Set the font to Arial */
-      max-width: 100%; /* Make the body width responsive */
-      margin: 0 auto; /* Center the content horizontally */
+      background-color: var(--bg);
+      font-size: 29px;
+      color: var(--text);
+      font-family: 'Arial', sans-serif;
+      max-width: 100%;
+      margin: 0 auto;
     }
 
     a {
-      color: tomato;
+      color: var(--link);
       text-decoration: none;
-      display: block; /* Add this to make each link appear on a new line */
-      margin-bottom: 3px; /* Adjusted space between links */
+      display: block;
+      margin-bottom: 3px;
     }
-    p {
-      color:slategrey;
-      margin-bottom: 5px; /* Reduce space after the paragraph */
-    }
+
     center {
-      text-align: center; /* Center align the content */
+      text-align: center;
     }
-    /* Style for the 'More Alternatives' link */
+
     #alternatives a {
-      font-size: 30px;
-      margin-top: 5px; /* Reduce space after the paragraph */
-      border-top: 1px solid slategray; /* Add a border (line) above link */
-      color: red; /* Set the color of the 'More Alternatives' link to red */
+      border-top: 1px solid var(--border);
+      color: red;
     }
   </style>
 </head>
