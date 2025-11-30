@@ -1,0 +1,31 @@
+<div class="color-input-container">
+        <label for="accentColorInput" style="font-size:16px">Accent:</label>
+        <input type="text" id="accentColorInput" placeholder="Color name/hex">
+        <div class="color-preview"></div>
+    </div>
+
+    <script>
+        const colorInput = document.getElementById('accentColorInput');
+        const colorPreview = document.querySelector('.color-preview');
+
+        function isValidColor(strColor) {
+            const s = new Option().style;
+            s.color = strColor;
+            return s.color !== '';
+        }
+
+        colorInput.addEventListener('input', function() {
+            const color = this.value;
+            
+            if (isValidColor(color)) {
+                // Update CSS variable
+                document.documentElement.style.setProperty('--user-accent-color', color);
+                
+                // Update preview
+                colorPreview.style.backgroundColor = color;
+            } else {
+                // Optional: Add some error handling
+                colorPreview.style.backgroundColor = 'transparent';
+            }
+        });
+    </script>
