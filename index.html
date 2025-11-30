@@ -1,82 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <link rel="shortcut icon" type="image/x-icon" href="images/house.ico">
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="author" content="reluben">
-  <title>Homepage</title>
-  <style>
-    :root {
-      /* Light mode defaults */
-      --bg-color: white;
-      --text-color: #1a1a1a;
-      --accent-color: tomato;
-      --special-color: red;
-      --border-color: #cccccc;
-    }
-
-    @media (prefers-color-scheme: dark) {
-      :root {
-        /* Dark mode – matches your original design exactly */
-        --bg-color: black;
-        --text-color: slategray;
-        --accent-color: tomato;
-        --special-color: red;
-        --border-color: slategray;
-      }
-    }
-
-    body {
-      background-color: var(--bg-color);
-      font-size: 27px;
-      color: var(--text-color);
-      font-family: 'Arial', sans-serif;
-      max-width: 100%;
-      margin: 0 auto;
-    }
-
-    a {
-      color: var(--text-color);
-      text-decoration: none;
-      display: block;
-      margin-bottom: 3px;
-    }
-
-    /* First three main links – bold, larger, tomato */
-    a:nth-child(-n+2) {
-      font-weight: bold;
-      color: var(--accent-color);
-      font-size: 30px;
-      border-bottom: none;
-      padding-bottom: 3px;
-    }
-
-    center {
-      text-align: center;
-    }
-
-    /* More Alternatives section */
-    #alternatives a {
-      font-size: 30px;
-      border-top: 1px solid var(--border-color);
-      border-bottom: none;
-      color: var(--special-color);
-      font-weight: normal;
-    }
-  </style>
+    <link rel="shortcut icon" type="image/x-icon" href="images/house.ico">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="reluben">
+    <link rel="stylesheet" href="styles.css">
+    <title>Homepage</title>
+    <style>
+        body {font-size: 27px;}
+        a {text-decoration: none; display: block;}
+    </style>
 </head>
+
 <body>
-  <center>
-    <a href="https://www.cineby.gd/">Cineby</a>
-    <a href="https://animekai.to/home">AnimeKai</a>
-    <a href="https://github.com/reluben">GitHub</a>
-    <a href="https://duck.ai">🦆</a>
-    <br>
-    <div id="alternatives">
-      <a href="wordgames.html">Word Games</a>
-      <a href="alternatives.html">Alternatives</a>
-    </div>
-  </center>
+    <center>
+        <a href="https://www.cineby.gd/">Cineby</a>
+        <a href="https://animekai.to/home">AnimeKai</a>
+        <a href="https://github.com/reluben">GitHub</a>
+        <a href="https://duck.ai">duck.ai🦆</a>
+        <br>
+        <table>
+            <tr>
+                <td><a href="wordgames.html">Word Games</a></td>
+            </tr>
+            <tr>
+                <td><a href="alternatives.html">Alternatives</a></td>
+            </tr>
+        </table>
+    </center>
 </body>
+
 </html>
