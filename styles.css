@@ -32,18 +32,18 @@ body {
     background-color: black;
     color: white;
     a {
-      color: red;
+      color: tomato;
     }
     th {
-      background-color: red;
+      background-color: tomato;
       border: 1px solid black;
     }
     td {
-      border: 1px solid red;
+      border: 1px solid tomato;
     }
     h1,
     h2 {
-      border-bottom: 3px solid red;
+      border-bottom: 3px solid tomato;
     }
   }
 }
