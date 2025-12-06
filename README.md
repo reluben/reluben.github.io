@@ -6,12 +6,11 @@ A simple [homepage](https://reluben.github.io) that puts useful links all in one
 1. Watching movies and TV shows
 2. Watching anime
 3. My (this) GitHub page
-4. AI models 
-5. [Word Games](https://reluben.github.io/wordgames.html) — word games
-6. [Alternatives](https://reluben.github.io/alternatives.html) — fallback links if primary links are down
+4. [Word Games](https://reluben.github.io/wordgames.html) — word games
+5. [Alternatives](https://reluben.github.io/alternatives.html) — fallback links if primary links are down
 
 # Extras (can be found in alternatives)
-- [Disc golf beginner's guide](https://reluben.github.io/discgolf.html)
+- [Disc Golf in 90 sec](https://reluben.github.io/discgolf_beginner.html)
 - [Timer](https://reluben.github.io/project_timer.html) — for tracking project time (useful for billable work) 
 
 ## Usage
