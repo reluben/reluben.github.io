@@ -10,9 +10,9 @@ A simple [homepage](https://reluben.github.io) that puts useful links all in one
 5. [Alternatives](https://reluben.github.io/alternatives.html) — fallback links if primary links are down
 
 # Extras (can be found in alternatives)
-- [Disc Golf in 90 sec](https://reluben.github.io/discgolf_beginner.html)
 - [Timer](https://reluben.github.io/project_timer.html) — for tracking project time (useful for billable work) 
-
+- [Disc Golf in 90 sec](https://reluben.github.io/discgolf_beginner.html)
+- 
 ## Usage
 - Clone the repo and open the main HTML file in your browser.
 - Edit link targets and add or remove categories as needed.
