@@ -12,7 +12,7 @@ A simple [homepage](https://reluben.github.io) that puts useful links all in one
 # Extras (can be found in alternatives)
 - [Timer](https://reluben.github.io/project_timer.html) — for tracking project time (useful for billable work) 
 - [Disc Golf in 90 sec](https://reluben.github.io/discgolf_beginner.html)
-- 
+
 ## Usage
 - Clone the repo and open the main HTML file in your browser.
 - Edit link targets and add or remove categories as needed.
