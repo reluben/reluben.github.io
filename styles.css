@@ -1,56 +1,35 @@
 :root {
     color-scheme: light dark;
-}
 
-body {
-    font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial,
-        sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-    max-width: 100%;
-    margin: 0 auto;
-    padding: 20px;
-    background: white;
-    color: black;
-    line-height: 1.5;
-    a {
-        color: black;
-    }
-    th {
-        background-color: lightgrey;
-        border: 1px solid black;
-    }
-    td {
-        border: 1px solid black;
-    }
-    h1,
-    h2 {
-        border-bottom: 3px solid black;
-    }
+    --bg-body: white;
+    --text: black;
+    --accent: lightblue;
+    --border: black;   /* Used for tables AND heading underlines */
+    --link: black;
 }
 
 @media (prefers-color-scheme: dark) {
-    body {
-        background-color: black;
-        color: white;
-        a {
-            color: tomato;
-        }
-        th {
-            background-color: tomato;
-            border: 1px solid black;
-        }
-        td {
-            border: 1px solid tomato;
-        }
-        h1,
-        h2 {
-            border-bottom: 3px solid tomato;
-        }
+    :root {
+        --bg-body: black;
+        --text: white;
+        --accent: tomato;
+        --border: tomato;   /* Both tables and headings switch to tomato */
+        --link: tomato;
     }
 }
 
-h1,
-h2 {
-    border-bottom: light dark;
+body {
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    background: var(--bg-body);
+    color: var(--text);
+    line-height: 1.5;
+}
+
+h1, h2 {
+    border-bottom: 3px solid var(--border);
     padding-block-end: 6px;
     margin-block-start: 2em;
 }
@@ -60,25 +39,33 @@ h1 {
     text-align: center;
 }
 
+a {
+    color: var(--link);
+}
+
 table {
     width: 100%;
     border-collapse: collapse;
     margin-block: 15px;
 }
 
-th,
-td {
-    border: light dark;
+th, td {
+    border: 1px solid var(--border);
     padding: 8px;
     text-align: center;
 }
 
 th {
-    background-color: light dark;
-    color: black;
+    background-color: var(--accent);
     font-weight: bold;
 }
 
-a {
-    color-scheme: light dark;
+@media (prefers-color-scheme: dark) {
+    th {
+        color: black;
+    }
+}
+
+.diagonal-split {
+    background: linear-gradient(45deg, var(--accent) 50%, transparent 50%);
 }
