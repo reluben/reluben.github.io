@@ -1,5 +1,22 @@
 :root {
     color-scheme: light dark;
+
+    /* Variables */
+    --bg-body: white;
+    --text: black;
+    --accent: lightblue;
+    --border: black;
+    --link: black;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-body: black;
+        --text: white;
+        --accent: tomato;
+        --border: tomato;
+        --link: tomato;
+    }
 }
 
 body {
@@ -8,28 +25,27 @@ body {
     max-width: 100%;
     margin: 0 auto;
     padding: 20px;
-    background: white;
-    color: black;
+    background: var(--bg-body);
+    color: var(--text);
     line-height: 1.5;
     a {
-        color: black;
+        color: var(--link);
     }
     th {
-        background-color: lightgrey;
-        border: 1px solid black;
+        background-color: var(--accent);
+        border: 1px solid var(--border);
     }
     td {
-        border: 1px solid black;
+        border: 1px solid var(--border);
     }
-    h1,
-    h2 {
-        border-bottom: 3px solid black;
+    h1, h2 {
+        border-bottom: 3px solid var(--border);
     }
 }
 
 @media (prefers-color-scheme: dark) {
     body {
-        background-color: black;
+        background-color: var(--bg-body);
         color: white;
         a {
             color: tomato;
@@ -81,4 +97,9 @@ th {
 
 a {
     color-scheme: light dark;
+}
+
+.diagonal-split {
+    background: 
+        linear-gradient(45deg, var(--accent) 50%, transparent 50%);
 }
