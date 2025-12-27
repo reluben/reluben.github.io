@@ -39,6 +39,10 @@ h1 {
     text-align: center;
 }
 
+hr{
+    border-color: var(--accent) 
+}
+
 a {
     color: var(--link);
 }
@@ -67,5 +71,5 @@ th {
 }
 
 .diagonal-split {
-    background: linear-gradient(45deg, var(--accent) 50%, transparent 50%);
+    background: linear-gradient(45deg, var(--accent) 40%, transparent 60%);
 }
